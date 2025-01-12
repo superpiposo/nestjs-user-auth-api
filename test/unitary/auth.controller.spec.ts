@@ -39,7 +39,9 @@ describe('AuthController', () => {
       email: data.email,
       password: data.password,
     });
-    const verifyToken = await authController.verifyToken(signedIn.access_token);
+    const verifyToken = await authController.verifyToken({
+      access_token: signedIn.access_token,
+    });
     expect(verifyToken).toBeTruthy();
   });
   it('removes the created user', async () => {

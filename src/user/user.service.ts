@@ -26,13 +26,13 @@ export class UserService {
     where: Prisma.UserWhereUniqueInput,
     data: UpdateUserDto,
   ): Promise<User> {
-    if (await this.exists(where)) {
-      throw new BadRequestException('User Already Exists');
+    if ((await this.exists(where)) === false) {
+      throw new BadRequestException('User do not exists!');
     }
     return this.prisma.user.update({ where, data });
   }
 
-  remove(where: Prisma.UserWhereUniqueInput): Promise<User> {
+  async remove(where: Prisma.UserWhereUniqueInput): Promise<User> {
     return this.prisma.user.delete({ where });
   }
   async exists(where: Prisma.UserWhereUniqueInput): Promise<boolean> {

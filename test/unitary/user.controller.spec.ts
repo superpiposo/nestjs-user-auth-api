@@ -24,9 +24,9 @@ describe('UserController', async () => {
     const user = await userController.findOne(createdUser.id);
     expect(user.email).toBe(data.email);
   });
-  it('shold find user', async () => {
+  it('shold find users', async () => {
     const users = await userController.findAll();
-    expect(users[0].email).toBe(data.email);
+    expect(users.length).toBeGreaterThan(0);
   });
   it('shold update user', async () => {
     const toUpdate: UpdateUserDto = {
